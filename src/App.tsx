@@ -2,7 +2,7 @@ import { useState } from 'react'
 import AddTask from './components/addTask'
 import TaskList from './components/taskList'
 import { X } from 'lucide-react'
-import useTaskStore, { Task } from './store/store'
+import useTaskStore from './store/store'
 
 function App() {
   const [showAddTask, setShowAddTask] = useState<boolean>(false)
@@ -61,9 +61,14 @@ function App() {
               className={`btn btn-outline btn-accent h-8 btn-md ${
                 showAddTask ? 'btn-active' : ''
               }`}
-              onClick={() =>
-                document.getElementById('add_task_modal').showModal()
-              }
+              onClick={() => {
+                const modal = document.getElementById(
+                  'add_task_modal'
+                ) as HTMLDialogElement | null
+                if (modal) {
+                  modal.showModal()
+                }
+              }}
             >
               Add Task
             </button>
@@ -72,7 +77,7 @@ function App() {
       </div>
 
       {/* Task List - Pass streaks to TaskList */}
-      <TaskList tasks={tasks} streaks={streaks} />
+      <TaskList />
 
       {/* Add Task Modal */}
       <dialog id="add_task_modal" className="modal">
