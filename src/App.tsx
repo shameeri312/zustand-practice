@@ -52,7 +52,9 @@ function App() {
 
               <progress
                 className="progress progress-accent w-full md:w-56"
-                value="80"
+                value={
+                  (Object.values(streaks).reduce((a, b) => a + b, 0) / 30) * 100
+                }
                 max="100"
               ></progress>
             </div>
